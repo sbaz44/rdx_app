@@ -1,6 +1,8 @@
 import 'package:rdx_app/screens/Login.dart';
 import 'package:rdx_app/screens/Dashboard.dart';
 import 'package:get/get.dart';
+import 'package:rdx_app/screens/Setting.dart';
+import 'package:rdx_app/screens/Store.dart';
 
 class Routerr {
   static final route = [
@@ -9,8 +11,16 @@ class Routerr {
       page: () => Login(),
     ),
     GetPage(
-      name: '/dashboard',
+      name: '/device',
       page: () => Dashboard(),
+    ),
+    GetPage(
+      name: '/store',
+      page: () => Store(),
+    ),
+    GetPage(
+      name: '/setting',
+      page: () => Setting(),
     ),
     // GetPage(
     //   name: '/signIn',

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rdx_app/helper/constants.dart';
-
 import 'package:rdx_app/helper/size_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF000000),
+      backgroundColor: Color(0xFFFAFAFA),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -64,14 +63,14 @@ class Login extends StatelessWidget {
                             enabledBorder: UnderlineInputBorder(
                               borderRadius: BorderRadius.circular(0),
                               borderSide: BorderSide(
-                                color: Colors.white,
+                                color: kPrimaryColor,
                                 width: 2,
                               ),
                             ),
                           ),
                           style: GoogleFonts.exo2(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: kTextColor,
                             fontWeight: FontWeight.normal,
                           ),
                           // validator: (value) => value.trim().isEmpty
@@ -102,7 +101,7 @@ class Login extends StatelessWidget {
                             enabledBorder: UnderlineInputBorder(
                               borderRadius: BorderRadius.circular(0),
                               borderSide: BorderSide(
-                                color: Colors.white,
+                                color: kPrimaryColor,
                                 width: 2,
                               ),
                             ),
@@ -111,7 +110,7 @@ class Login extends StatelessWidget {
                           //     value.trim().isEmpty ? 'Password required' : null,
                           style: GoogleFonts.exo2(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: kTextColor,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -141,7 +140,7 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Get.offAndToNamed('/dashboard');
+                                Get.offAndToNamed('/store');
                                 // if (_formKey.currentState.validate()) {
                                 //   _loginController.apiLogin('app/login', '');
                                 // }

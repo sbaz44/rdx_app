@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 defaultTransition: Transition.rightToLeft,
                 getPages: Routerr.route,
-                initialRoute: '/login',
+                initialRoute: '/store',
                 theme: ThemeData(
                   // primarySwatch: new Color(0xFF2029A0),
                   primaryColor: new Color(0xFF2029A0),
