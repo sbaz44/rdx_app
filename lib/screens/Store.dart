@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/controller/BottomNavigatorController.dart';
 import 'package:rdx_app/controller/StoreController.dart';
+import 'package:rdx_app/helper/Search.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class Store extends StatelessWidget {
+  final List<String> list = List.generate(10, (index) => "Text $index");
   final BottomNavigatorController _bottomNav =
       Get.put(BottomNavigatorController());
 
@@ -45,6 +47,59 @@ class Store extends StatelessWidget {
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  showSearch(context: context, delegate: Search(list));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: Colors.grey[600],
+                      // boxShadow: [
+                      //   BoxShadow(color: Colors.green, spreadRadius: 3),
+                      // ],
+                    ),
+                    // color: Colors.red,
+                    child: Row(children: <Widget>[
+                      Icon(
+                        Icons.search,
+                        color: Colors.white60,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 4.w),
+                        child: Text(
+                          "Search app",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            color: Colors.white60,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: TextField(
+              //     onChanged: (value) {},
+              //     onTap: () {
+              //       showSearch(context: context, delegate: Search(list));
+              //     },
+              //     // controller: editingController,
+              //     decoration: InputDecoration(
+              //         labelText: "Search",
+              //         hintText: "Search",
+              //         prefixIcon: Icon(Icons.search),
+              //         border: OutlineInputBorder(
+              //             borderRadius:
+              //                 BorderRadius.all(Radius.circular(12.0)))),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0),
                 child: Align(

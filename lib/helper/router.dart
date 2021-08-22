@@ -1,6 +1,8 @@
+import 'package:rdx_app/screens/HomePage.dart';
 import 'package:rdx_app/screens/Login.dart';
 import 'package:rdx_app/screens/Dashboard.dart';
 import 'package:get/get.dart';
+import 'package:rdx_app/screens/SearchResult.dart';
 import 'package:rdx_app/screens/Setting.dart';
 import 'package:rdx_app/screens/Store.dart';
 
@@ -21,6 +23,14 @@ class Routerr {
     GetPage(
       name: '/setting',
       page: () => Setting(),
+    ),
+    GetPage(
+      name: '/home',
+      page: () => HomePage(),
+    ),
+    GetPage(
+      name: '/search',
+      page: () => SearchResult(),
     ),
     // GetPage(
     //   name: '/signIn',
