@@ -51,11 +51,13 @@ class SearchController extends GetxController {
     // });
 
     var dataa = await _client.getSearchData(query);
+    print("jsonEncode(dataa)");
+    print(jsonEncode(dataa));
     // data = [...dataa];
     searchResponse = [dataa];
     print(searchResponse.length);
     print("jsonEncode(searchResponse)");
-    print(jsonEncode(searchResponse));
+    // print(jsonEncode(searchResponse));
     // print(data?.birthYear);
     // _client.getSearchData(query).then((value) {
     //   print("value.results");

@@ -19,13 +19,15 @@ Dio tokenDio = Dio();
 class DioClient {
   final Dio _dio = Dio();
   Future<SwapiModel> getSearchData(String query) async {
-    Response userData = await _dio.get(_swapibaseUrl + query);
-
+    Response userData = await _dio.get(_swapibaseUrl);
+    // List<dynamic> list = json.decode(userData.data);
+    // print("list..........");
+    // print(list);
     // Prints the raw data returned by the server
     print('User Info: ${userData.data}');
 
     // Parsing the raw JSON data to the User class
-    SwapiModel user = SwapiModel.fromJson(userData.data);
+    SwapiModel user = SwapiModel.fromJson(userData.data[0]);
 
     return user;
 
