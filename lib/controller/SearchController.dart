@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:rdx_app/helper/request.dart';
 import 'package:rdx_app/models/SearchModel.dart';
+import 'package:rdx_app/models/SwapiModel.dart';
 
 class SearchController extends GetxController {
   var category = [].obs;
+  List<dynamic> data = <dynamic>[].obs;
   final DioClient _client = DioClient();
   // var alertResponse = Syste().obs;
+  List<SwapiModel> searchResponse = <SwapiModel>[].obs;
   List<String> catList = [
     "All",
     "CategoryA",
@@ -15,7 +19,6 @@ class SearchController extends GetxController {
     "CategoryC",
     "CategoryD"
   ];
-  late Timer _timer;
 
   @override
   void onInit() {
@@ -35,18 +38,25 @@ class SearchController extends GetxController {
   }
 
   void getSearch(String query) async {
-    GetSearchPost request = GetSearchPost(
-      query: query,
-    );
+    // GetSearchPost request = GetSearchPost(
+    //   query: query,
+    // );
 
-    request.getSearchData().then((value) {
-      print("value...........");
-      print(value);
-    }).catchError((onError) {
-      print("onError");
-      print(onError);
-    });
+    // request.getSearchData().then((value) {
+    //   print("value...........");
+    //   print(value);
+    // }).catchError((onError) {
+    //   print("onError CONTROLLER");
+    //   print(onError);
+    // });
 
+    var dataa = await _client.getSearchData(query);
+    // data = [...dataa];
+    searchResponse = [dataa];
+    print(searchResponse.length);
+    print("jsonEncode(searchResponse)");
+    print(jsonEncode(searchResponse));
+    // print(data?.birthYear);
     // _client.getSearchData(query).then((value) {
     //   print("value.results");
     //   print(value);
@@ -64,7 +74,7 @@ class SearchController extends GetxController {
   void handleSearch(
     String query,
   ) async {
-    if (query.length > 2) {
+    if (query.length > 1) {
       EasyDebounce.debounce(
           'debouncer1', Duration(milliseconds: 600), () => getSearch(query));
     }
