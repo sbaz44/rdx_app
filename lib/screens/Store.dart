@@ -32,21 +32,21 @@ class Store extends StatelessWidget {
         child: Container(
           child: new Column(
             children: <Widget>[
-              Container(
-                color: kBackgroundColor,
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    'Store',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
+              // Container(
+              //   color: kBackgroundColor,
+              //   alignment: Alignment.center,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(20.0),
+              //     child: Text(
+              //       'Store',
+              //       style: GoogleFonts.montserrat(
+              //         fontSize: 22,
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w600,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               GestureDetector(
                 onTap: () {
                   showSearch(context: context, delegate: Search(list));

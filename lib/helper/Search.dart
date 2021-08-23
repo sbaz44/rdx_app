@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rdx_app/controller/SearchController.dart';
+import 'package:rdx_app/controller/StoreController.dart';
 
 class Search extends SearchDelegate {
+  final SearchController _searchController = Get.put(SearchController());
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
@@ -46,6 +50,7 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestionList = [];
+    _searchController.handleSearch(query);
     query.isEmpty
         ? suggestionList = recentList //In the true case
         : suggestionList.addAll(listExample.where(
