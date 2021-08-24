@@ -49,31 +49,34 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> suggestionList = [];
+    // List<String> suggestionList = [];
     _searchController.handleSearch(query);
-    query.isEmpty
-        ? suggestionList = recentList //In the true case
-        : suggestionList.addAll(listExample.where(
-            // In the false case
-            (element) => element.contains(query),
-          ));
+    // query.isEmpty
+    //     ? suggestionList = recentList //In the true case
+    //     : suggestionList.addAll(listExample.where(
+    //         // In the false case
+    //         (element) => element.contains(query),
+    //       ));
 
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            suggestionList[index],
-          ),
-          leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
-          onTap: () {
-            selectedResult = suggestionList[index];
-            query = selectedResult;
-            showResults(context);
+    return Obx(() => ListView.builder(
+          // itemCount: _searchController.response.length,
+          itemCount: _searchController.response.length == 0
+              ? 0
+              : _searchController.response.length,
+          // _searchController.data["results"][index],
+          // itemCount: 2,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(_searchController.response[index].title),
+              // leading: query.isEmpty ? Icon(Icons.access_time) : SizedBox(),
+              onTap: () {
+                selectedResult = _searchController.response[index].title;
+                query = selectedResult;
+                showResults(context);
+              },
+            );
           },
-        );
-      },
-    );
+        ));
   }
 
   @override

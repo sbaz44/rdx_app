@@ -11,20 +11,20 @@ String searchModelToJson(SearchModel data) => json.encode(data.toJson());
 
 class SearchModel {
   SearchModel({
-    required this.lastPage,
-    required this.requestCacheExpiry,
-    required this.requestCached,
-    required this.requestHash,
-    required this.results,
+    this.lastPage,
+    this.requestCacheExpiry,
+    this.requestCached,
+    this.requestHash,
+    this.results,
   });
 
-  int lastPage;
-  int requestCacheExpiry;
-  bool requestCached;
-  String requestHash;
-  List<Result> results;
+  int? lastPage;
+  int? requestCacheExpiry;
+  bool? requestCached;
+  String? requestHash;
+  List<Result>? results;
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
+  factory SearchModel.fromJson(Map<dynamic, dynamic> json) => SearchModel(
         lastPage: json["last_page"],
         requestCacheExpiry: json["request_cache_expiry"],
         requestCached: json["request_cached"],
@@ -38,7 +38,7 @@ class SearchModel {
         "request_cache_expiry": requestCacheExpiry,
         "request_cached": requestCached,
         "request_hash": requestHash,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(results!.map((x) => x.toJson())),
       };
 }
 
@@ -54,33 +54,33 @@ class Result {
     this.score,
     this.startDate,
     this.synopsis,
-    this.title,
+    required this.title,
     this.type,
   });
 
   bool? airing;
-  DateTime? endDate;
+  String? endDate;
   int? episodes;
   String? imageUrl;
   int? malId;
   int? members;
   String? rated;
   double? score;
-  DateTime? startDate;
+  String? startDate;
   String? synopsis;
-  String? title;
+  String title;
   String? type;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         airing: json["airing"],
-        endDate: DateTime.parse(json["end_date"]),
+        endDate: json["end_date"],
         episodes: json["episodes"],
         imageUrl: json["image_url"],
         malId: json["mal_id"],
         members: json["members"],
         rated: json["rated"],
         score: json["score"].toDouble(),
-        startDate: DateTime.parse(json["start_date"]),
+        startDate: json["start_date"],
         synopsis: json["synopsis"],
         title: json["title"],
         type: json["type"],
@@ -88,14 +88,14 @@ class Result {
 
   Map<String, dynamic> toJson() => {
         "airing": airing,
-        "end_date": endDate?.toIso8601String(),
+        "end_date": endDate,
         "episodes": episodes,
         "image_url": imageUrl,
         "mal_id": malId,
         "members": members,
         "rated": rated,
         "score": score,
-        "start_date": startDate?.toIso8601String(),
+        "start_date": startDate,
         "synopsis": synopsis,
         "title": title,
         "type": type,

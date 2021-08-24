@@ -18,8 +18,19 @@ Dio tokenDio = Dio();
 
 class DioClient {
   final Dio _dio = Dio();
-  Future<SwapiModel> getSearchData(String query) async {
-    Response userData = await _dio.get(_swapibaseUrl);
+  Future<SearchModel> getSearchData(String query) async {
+    // Response userData = await _dio.get(_swapibaseUrl);
+    print(_baseUrl + query);
+    Response userData = await _dio.get(_baseUrl + query);
+    // print("jsonEncode(userData.data)");
+    // print(jsonEncode(userData.data));
+    // for (Map i in userData.data) {
+    //   // listModel.add(SearchModel.fromJson(i));
+    //   print("i");
+    //   print(i);
+    // }
+    // print("listModel");
+    // print(listModel);
     // List<dynamic> list = json.decode(userData.data);
     // print("list..........");
     // print(list);
@@ -27,7 +38,7 @@ class DioClient {
     print('User Info: ${userData.data}');
 
     // Parsing the raw JSON data to the User class
-    SwapiModel user = SwapiModel.fromJson(userData.data[0]);
+    SearchModel user = SearchModel.fromJson(userData.data);
 
     return user;
 
@@ -70,7 +81,7 @@ class GetSearchPost {
   });
 
   Future<SearchModel> getSearchData() async {
-    print("object");
+    print(_baseUrl + query);
     Response userData = await dioo.get(_baseUrl + query);
     print('User Info: ${userData.data}');
     SearchModel _data = SearchModel.fromJson(userData.data);
@@ -107,10 +118,8 @@ class GetSearchPost {
     // }
     // print("Returning user");
     // return user;
-    print("_data.results");
-    print(_data);
     // var response = await dioo.get(_baseUrl + query);
-    return SearchModel.fromJson(userData.data);
+    return _data;
   }
 }
 

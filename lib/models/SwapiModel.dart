@@ -19,7 +19,7 @@ class SwapiModel {
   double? score;
   Show? show;
 
-  factory SwapiModel.fromJson(Map<String, dynamic> json) => SwapiModel(
+  factory SwapiModel.fromJson(Map<dynamic, dynamic> json) => SwapiModel(
         score: json["score"].toDouble(),
         show: Show.fromJson(json["show"]),
       );

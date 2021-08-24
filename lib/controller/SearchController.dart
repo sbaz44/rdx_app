@@ -8,10 +8,15 @@ import 'package:rdx_app/models/SwapiModel.dart';
 
 class SearchController extends GetxController {
   var category = [].obs;
-  List<dynamic> data = <dynamic>[].obs;
+  RxMap<dynamic, dynamic> getResponse = {}.obs;
+
+  Map data = {}.obs;
+  List<Result> response = <Result>[].obs;
   final DioClient _client = DioClient();
-  // var alertResponse = Syste().obs;
-  List<SwapiModel> searchResponse = <SwapiModel>[].obs;
+
+  var myMap = <SearchModel>{}.obs;
+  var searchResponse = SearchModel().obs;
+  // List<SwapiModel> searchResponse = <SwapiModel>[].obs;
   List<String> catList = [
     "All",
     "CategoryA",
@@ -38,25 +43,25 @@ class SearchController extends GetxController {
   }
 
   void getSearch(String query) async {
-    // GetSearchPost request = GetSearchPost(
-    //   query: query,
-    // );
+    // var dataa = await _client.getSearchData(query);
 
-    // request.getSearchData().then((value) {
-    //   print("value...........");
-    //   print(value);
-    // }).catchError((onError) {
-    //   print("onError CONTROLLER");
-    //   print(onError);
-    // });
+    // data = json.decode(json.encode(dataa));
+    // print("getResponse?.results");
+    // print(data["results"][0]['title']);
 
-    var dataa = await _client.getSearchData(query);
-    print("jsonEncode(dataa)");
-    print(jsonEncode(dataa));
-    // data = [...dataa];
-    searchResponse = [dataa];
-    print(searchResponse.length);
-    print("jsonEncode(searchResponse)");
+    GetSearchPost request = GetSearchPost(
+      query: query,
+    );
+
+    request.getSearchData().then((value) {
+      searchResponse.value = value;
+      response.clear();
+      response.addAll(searchResponse.value.results!.toList()); //coded by Dipesh
+    }).catchError((onError) {
+      print("onError CONTROLLER");
+      print(onError);
+    });
+
     // print(jsonEncode(searchResponse));
     // print(data?.birthYear);
     // _client.getSearchData(query).then((value) {
@@ -76,6 +81,9 @@ class SearchController extends GetxController {
   void handleSearch(
     String query,
   ) async {
+    if (query.length == 0) {
+      response.clear();
+    }
     if (query.length > 1) {
       EasyDebounce.debounce(
           'debouncer1', Duration(milliseconds: 600), () => getSearch(query));
