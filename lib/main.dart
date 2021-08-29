@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rdx_app/helper/constants.dart';
 import 'package:rdx_app/helper/router.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,14 +25,14 @@ class MyApp extends StatelessWidget {
               return GetMaterialApp(
                 title: 'RDX',
                 debugShowCheckedModeBanner: false,
-                defaultTransition: Transition.rightToLeft,
+                defaultTransition: Transition.rightToLeftWithFade,
                 getPages: Routerr.route,
-                initialRoute: '/store',
+                initialRoute: '/login',
                 theme: ThemeData(
                   // primarySwatch: new Color(0xFF2029A0),
-                  primaryColor: new Color(0xFF2029A0),
+                  primaryColor: kPrimaryColor,
                   appBarTheme: AppBarTheme(
-                    color: new Color(0xFF2029A0),
+                    color: kPrimaryColor,
                   ),
                 ),
               );

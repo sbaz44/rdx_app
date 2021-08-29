@@ -7,10 +7,11 @@ import 'package:dio/dio.dart';
 
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart' as http;
+import 'package:rdx_app/models/LoginModel.dart';
 import 'package:rdx_app/models/SearchModel.dart';
 import 'package:rdx_app/models/SwapiModel.dart';
 
-final _baseUrl = 'https://api.jikan.moe/v3/search/anime?q=';
+final _baseUrl = 'http://182.70.113.98:81/api/v1/users/';
 final _swapibaseUrl = 'http://api.tvmaze.com/search/shows?q=golden%20girls';
 Dio dioo = Dio();
 //  dio instance to request token
@@ -122,6 +123,26 @@ class GetSearchPost {
     return _data;
   }
 }
+
+class PostLogin {
+  final String endpoint;
+  PostLogin({
+    required this.endpoint,
+  });
+
+  Future<LoginResponseModel> postAPI() async {
+    dioo.options.headers['content-Type'] = 'application/json';
+    dioo.options.headers["username"] = "string";
+    dioo.options.headers["password"] = "string";
+
+    print(_baseUrl + endpoint);
+    Response userData = await dioo.post(_baseUrl + endpoint);
+    print('User Info: ${userData.data}');
+    LoginResponseModel _data = LoginResponseModel.fromJson(userData.data);
+    return _data;
+  }
+}
+
 
 // Future<User?> getUser({required String id}) async {
 //   User? user;

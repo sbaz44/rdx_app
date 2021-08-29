@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rdx_app/controller/LoginController.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:rdx_app/helper/size_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final LoginController _loginController = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +46,12 @@ class Login extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         TextFormField(
-                          // controller: _loginController.emailTextController,
-                          keyboardType: TextInputType.phone,
+                          controller: _loginController.username,
+                          keyboardType: TextInputType.name,
                           decoration: InputDecoration(
                             // fillColor: Colors.grey[200],
                             filled: false,
-                            hintText: 'Phone Number',
+                            hintText: 'Username',
                             hintStyle: GoogleFonts.montserrat(
                               fontSize: 16,
                               color: Colors.grey,
@@ -73,9 +77,9 @@ class Login extends StatelessWidget {
                             color: kTextColor,
                             fontWeight: FontWeight.normal,
                           ),
-                          // validator: (value) => value.trim().isEmpty
-                          //     ? 'Mobile is required'
-                          //     : null,
+                          validator: (value) => value!.trim().isEmpty
+                              ? 'Username is required'
+                              : null,
                         ),
                         SizedBox(height: 50),
                         TextFormField(
@@ -121,7 +125,8 @@ class Login extends StatelessWidget {
                         //   () =>
                         //       _buildInvalidandForget(_loginController.isError),
                         // ),
-                        SizedBox(height: 75),
+
+                        SizedBox(height: 5.h),
                         Center(
                           child: MaterialButton(
                               color: kButtonColor,
@@ -140,12 +145,29 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Get.offAndToNamed('/store');
-                                // if (_formKey.currentState.validate()) {
-                                //   _loginController.apiLogin('app/login', '');
-                                // }
+                                // Get.offAndToNamed('/store');
+                                if (_formKey.currentState!.validate()) {
+                                  _loginController.postLogin('login');
+                                }
                               }),
                         ),
+                        SizedBox(height: 3.h),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed("/register");
+                          },
+                          child: Center(
+                            child: Text(
+                              'Sign Up',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.montserrat(
+                                fontSize: 6.w,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
