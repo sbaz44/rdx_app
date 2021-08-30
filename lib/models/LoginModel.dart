@@ -12,14 +12,14 @@ String loginResponseModelToJson(LoginResponseModel data) =>
 
 class LoginResponseModel {
   LoginResponseModel({
-    required this.accessToken,
-    required this.refreshToken,
-    required this.userType,
+    this.accessToken,
+    this.refreshToken,
+    this.userType,
   });
 
-  String accessToken;
-  String refreshToken;
-  List<String> userType;
+  String? accessToken;
+  String? refreshToken;
+  List<String>? userType;
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(
@@ -31,6 +31,6 @@ class LoginResponseModel {
   Map<String, dynamic> toJson() => {
         "accessToken": accessToken,
         "refreshToken": refreshToken,
-        "userType": List<dynamic>.from(userType.map((x) => x)),
+        "userType": List<dynamic>.from(userType!.map((x) => x)),
       };
 }

@@ -110,8 +110,9 @@ class Login extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // validator: (value) =>
-                          //     value.trim().isEmpty ? 'Password required' : null,
+                          validator: (value) => value!.trim().isEmpty
+                              ? 'Password required'
+                              : null,
                           style: GoogleFonts.exo2(
                             fontSize: 16,
                             color: kTextColor,
@@ -145,7 +146,6 @@ class Login extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                // Get.offAndToNamed('/store');
                                 if (_formKey.currentState!.validate()) {
                                   _loginController.postLogin('login');
                                 }

@@ -34,6 +34,8 @@ dependencies:
   snapping_page_scroll: ^2.0.2
   material_floating_search_bar: ^0.3.4
   easy_debounce: ^2.0.1
+  shared_preferences: ^2.0.7
+  multi_select_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

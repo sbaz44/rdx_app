@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart' as http;
 import 'package:rdx_app/models/LoginModel.dart';
+import 'package:rdx_app/models/RegisterModel.dart';
 import 'package:rdx_app/models/SearchModel.dart';
 import 'package:rdx_app/models/SwapiModel.dart';
 
@@ -132,7 +133,7 @@ class PostLogin {
 
   Future<LoginResponseModel> postAPI() async {
     dioo.options.headers['content-Type'] = 'application/json';
-    dioo.options.headers["username"] = "string";
+    dioo.options.headers["username"] = "stringg";
     dioo.options.headers["password"] = "string";
 
     print(_baseUrl + endpoint);
@@ -140,6 +141,29 @@ class PostLogin {
     print('User Info: ${userData.data}');
     LoginResponseModel _data = LoginResponseModel.fromJson(userData.data);
     return _data;
+  }
+}
+
+class PostRegister {
+  Future<String?> postAPI(Map data) async {
+    try {
+      dioo.options.headers['content-Type'] = 'application/json';
+
+      print(_baseUrl);
+      Response userData = await dioo.post(_baseUrl, data: data);
+      print('User Info: ${userData.data}');
+      // String _data = String.fromJson(userData.data);
+      return userData.data;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        print(e.response?.statusCode);
+      } else {
+        print("e.message");
+        print(e.message);
+        print(e.response);
+        // print(e.requestOptions);
+      }
+    }
   }
 }
 

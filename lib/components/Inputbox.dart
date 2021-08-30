@@ -37,7 +37,7 @@ class Inputbox extends StatelessWidget {
             height: 5,
           ),
           Container(
-            height: validator == true ? 70 : 50,
+            // height: validator == true ? 70 : 50,
             child: TextFormField(
                 obscureText: secure ?? false,
                 // keyboardType: TextInputType.number,
@@ -50,7 +50,7 @@ class Inputbox extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
                 ),
-                // validator: (value) => value!.isEmpty ? errorText : "null",
+                validator: (value) => value!.isEmpty ? errorText : null,
 
                 // onFieldSubmitted: ,
                 maxLines: 1,
@@ -66,6 +66,15 @@ class Inputbox extends StatelessWidget {
                 //       borderSide: BorderSide(color: Colors.grey[400]!)),
                 // ),
                 decoration: InputDecoration(
+                    // errorBorder: ,
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       borderSide: BorderSide.none,
