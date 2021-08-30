@@ -252,14 +252,11 @@ class Register extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              _registerController.postData('register');
-                              // _loginController.postLogin('login');
-                            }
-                            // Get.offAndToNamed('/store');
-                            // if (_formKey.currentState.validate()) {
-                            //   _loginController.apiLogin('app/login', '');
+                            // if (_formKey.currentState!.validate()) {
+                            //   _registerController.postData('register');
+
                             // }
+                            Get.toNamed("otp");
                           }),
                     ),
                     SizedBox(
@@ -278,7 +275,7 @@ class Register extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // Get.toNamed("login");
+                            Get.toNamed("login");
                           },
                           child: Text(
                             'Log in',

@@ -1,11 +1,19 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/helper/request.dart';
+import 'package:rdx_app/models/OTP.dart';
+import 'package:rdx_app/models/OTPGenratedResponse.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterController extends GetxController {
   // var userType = "User".obs;
   var userType = [].obs;
+  var otpGResponse = OtpgResponse().obs;
 
+  String? accessKey = "";
   List<String> userList = [
     "user",
     "developer",
@@ -150,11 +158,6 @@ class RegisterController extends GetxController {
   }
 
   bool isValidEmail(String email) {
-    print("email");
-    print(email);
-    print(RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(email));
     return RegExp(
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(email);
@@ -174,7 +177,82 @@ class RegisterController extends GetxController {
     };
     print(userData);
     request.postAPI(userData).then((value) {
+      // otpGResponse.value = value;
+      accessKey = value!.accessToken;
+      postOTP('otp');
+      // Get.bottomSheet(
+      //     Container(
+      //         height: 8.h,
+      //         color: Colors.green[600],
+      //         child: Column(
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: [
+      //             Center(
+      //               child: Text('Registered Successfully!',
+      //                   style: GoogleFonts.montserrat(
+      //                     fontSize: 15,
+      //                     color: Colors.black,
+      //                     fontWeight: FontWeight.w400,
+      //                   )),
+      //             ),
+      //           ],
+      //         )),
+      //     barrierColor: Colors.transparent,
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(35),
+      //       // side: BorderSide(width: 5, color: Colors.black)
+      //     ),
+      //     enableDrag: false,
+      //     isDismissible: true);
+    }).catchError((onError) {
+      print("onError CONTROLLER");
+      print(onError);
+    });
+  }
+
+  void postOTP(String query) async {
+    PostGenreatedOTP request = PostGenreatedOTP(endpoint: query);
+    var rng = new Random();
+    var code = rng.nextInt(900000) + 100000;
+    var userData = {
+      "accessKey": accessKey,
+      "username": username!.text,
+      "destination": email!.text,
+      "otp": code.toString(),
+      "interval": "10"
+    };
+    print(userData);
+    request.postAPI(userData).then((value) {
+      print("OTP GENERATED RES");
       print(value);
+      otpGResponse.value = value!;
+      var httpStatusCode = otpGResponse.value.responseMetadata!.httpStatusCode;
+      if (httpStatusCode != 200) {
+        Get.bottomSheet(
+            Container(
+                height: 8.h,
+                color: Colors.red[400],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text('Email ID is invalid !',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          )),
+                    ),
+                  ],
+                )),
+            barrierColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35),
+              // side: BorderSide(width: 5, color: Colors.black)
+            ),
+            enableDrag: false,
+            isDismissible: true);
+      }
     }).catchError((onError) {
       print("onError CONTROLLER");
       print(onError);
@@ -193,13 +271,13 @@ class RegisterController extends GetxController {
     focusPassword.dispose();
     focusCPassword.dispose();
 
-    fullName?.dispose();
-    phone?.dispose();
-    email?.dispose();
-    companyName?.dispose();
-    username?.dispose();
-    password?.dispose();
-    cpassword?.dispose();
+    // fullName?.dispose();
+    // phone?.dispose();
+    // email?.dispose();
+    // companyName?.dispose();
+    // username?.dispose();
+    // password?.dispose();
+    // cpassword?.dispose();
     super.dispose();
   }
 

@@ -8,6 +8,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart' as http;
 import 'package:rdx_app/models/LoginModel.dart';
+import 'package:rdx_app/models/OTP.dart';
+import 'package:rdx_app/models/OTPGenratedResponse.dart';
 import 'package:rdx_app/models/RegisterModel.dart';
 import 'package:rdx_app/models/SearchModel.dart';
 import 'package:rdx_app/models/SwapiModel.dart';
@@ -145,15 +147,49 @@ class PostLogin {
 }
 
 class PostRegister {
-  Future<String?> postAPI(Map data) async {
+  // Future<Map<String, dynamic>?> postAPI(Map data) async {
+  Future<OtpGenratedResponse?> postAPI(Map data) async {
     try {
       dioo.options.headers['content-Type'] = 'application/json';
 
       print(_baseUrl);
       Response userData = await dioo.post(_baseUrl, data: data);
       print('User Info: ${userData.data}');
+
       // String _data = String.fromJson(userData.data);
-      return userData.data;
+      OtpGenratedResponse _data = OtpGenratedResponse.fromJson(userData.data);
+
+      // String _data = String.fromJson(resData.data);
+      return _data;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 404) {
+        print(e.response?.statusCode);
+      } else {
+        print("e.message");
+        print(e.message);
+        print(e.response);
+        // print(e.requestOptions);
+      }
+    }
+  }
+}
+
+class PostGenreatedOTP {
+  final String endpoint;
+  PostGenreatedOTP({
+    required this.endpoint,
+  });
+  Future<OtpgResponse?> postAPI(Map data) async {
+    try {
+      dioo.options.headers['content-Type'] = 'application/json';
+
+      print(_baseUrl);
+      Response resData = await dioo.post(_baseUrl + endpoint, data: data);
+      print('User Info: ${resData.data}');
+      OtpgResponse _data = OtpgResponse.fromJson(resData.data);
+
+      // String _data = String.fromJson(resData.data);
+      return _data;
     } on DioError catch (e) {
       if (e.response?.statusCode == 404) {
         print(e.response?.statusCode);
