@@ -56,25 +56,6 @@ class OTP extends StatelessWidget {
             ),
           ],
         )));
-    // return Material(
-    //   color: Colors.transparent,
-    //   child: Container(
-    //     padding: EdgeInsets.symmetric(horizontal: 20),
-    //     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //       Wrap(
-    //         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //         children: [
-    //           OTPDigitTextFieldBox(first: true, last: false),
-    //           OTPDigitTextFieldBox(first: false, last: false),
-    //           OTPDigitTextFieldBox(first: false, last: false),
-    //           OTPDigitTextFieldBox(first: false, last: false),
-    //           OTPDigitTextFieldBox(first: false, last: false),
-    //           OTPDigitTextFieldBox(first: false, last: true),
-    //         ],
-    //       )
-    //     ]),
-    //   ),
-    // );
   }
 }
 

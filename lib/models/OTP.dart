@@ -2,7 +2,6 @@
 //
 //     final otpgResponse = otpgResponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 OtpgResponse otpgResponseFromJson(String str) =>
@@ -12,36 +11,52 @@ String otpgResponseToJson(OtpgResponse data) => json.encode(data.toJson());
 
 class OtpgResponse {
   OtpgResponse({
-    this.messageId,
-    this.responseMetadata,
+    this.detail,
   });
 
-  String? messageId;
-  ResponseMetadata? responseMetadata;
+  Detail? detail;
 
   factory OtpgResponse.fromJson(Map<String, dynamic> json) => OtpgResponse(
+        detail: Detail.fromJson(json["detail"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "detail": detail!.toJson(),
+      };
+}
+
+class Detail {
+  Detail({
+    required this.messageId,
+    required this.responseMetadata,
+  });
+
+  String messageId;
+  ResponseMetadata responseMetadata;
+
+  factory Detail.fromJson(Map<String, dynamic> json) => Detail(
         messageId: json["MessageId"],
         responseMetadata: ResponseMetadata.fromJson(json["ResponseMetadata"]),
       );
 
   Map<String, dynamic> toJson() => {
         "MessageId": messageId,
-        "ResponseMetadata": responseMetadata!.toJson(),
+        "ResponseMetadata": responseMetadata.toJson(),
       };
 }
 
 class ResponseMetadata {
   ResponseMetadata({
-    this.requestId,
-    this.httpStatusCode,
-    this.httpHeaders,
-    this.retryAttempts,
+    required this.requestId,
+    required this.httpStatusCode,
+    required this.httpHeaders,
+    required this.retryAttempts,
   });
 
-  String? requestId;
-  int? httpStatusCode;
-  HttpHeaders? httpHeaders;
-  int? retryAttempts;
+  String requestId;
+  int httpStatusCode;
+  HttpHeaders httpHeaders;
+  int retryAttempts;
 
   factory ResponseMetadata.fromJson(Map<String, dynamic> json) =>
       ResponseMetadata(
@@ -54,25 +69,25 @@ class ResponseMetadata {
   Map<String, dynamic> toJson() => {
         "RequestId": requestId,
         "HTTPStatusCode": httpStatusCode,
-        "HTTPHeaders": httpHeaders!.toJson(),
+        "HTTPHeaders": httpHeaders.toJson(),
         "RetryAttempts": retryAttempts,
       };
 }
 
 class HttpHeaders {
   HttpHeaders({
-    this.date,
-    this.contentType,
-    this.contentLength,
-    this.connection,
-    this.xAmznRequestid,
+    required this.date,
+    required this.contentType,
+    required this.contentLength,
+    required this.connection,
+    required this.xAmznRequestid,
   });
 
-  String? date;
-  String? contentType;
-  String? contentLength;
-  String? connection;
-  String? xAmznRequestid;
+  String date;
+  String contentType;
+  String contentLength;
+  String connection;
+  String xAmznRequestid;
 
   factory HttpHeaders.fromJson(Map<String, dynamic> json) => HttpHeaders(
         date: json["date"],

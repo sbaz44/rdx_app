@@ -253,10 +253,10 @@ class Register extends StatelessWidget {
                           ),
                           onPressed: () {
                             // if (_formKey.currentState!.validate()) {
-                            //   _registerController.postData('register');
-
+                            _registerController.postData('register');
                             // }
-                            Get.toNamed("otp");
+                            // _registerController.bottomSheet();
+                            // Get.toNamed("otp");
                           }),
                     ),
                     SizedBox(
