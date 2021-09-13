@@ -16,6 +16,7 @@ class RegisterController extends GetxController {
   var code = 0;
   var otpGResponse = OtpgResponse().obs;
   final _formKey = GlobalKey<FormState>();
+  var isChecked = false.obs;
 
   String? accessKey = "";
   List<String> userList = [
@@ -173,6 +174,10 @@ class RegisterController extends GetxController {
       else
         isCPasswordEmpty.value = false;
     }
+  }
+
+  toggleCheckBox() {
+    isChecked.value = !isChecked.value;
   }
 
   bool isValidEmail(String email) {
@@ -449,11 +454,6 @@ class RegisterController extends GetxController {
     oTP6?.dispose();
     super.dispose();
   }
-
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
 }
 
 class OTPDigitTextFieldBox extends StatelessWidget {

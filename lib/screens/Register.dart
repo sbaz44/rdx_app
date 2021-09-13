@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rdx_app/components/Button.dart';
 import 'package:rdx_app/components/Inputbox.dart';
 import 'package:rdx_app/controller/RegisterController.dart';
 import 'package:rdx_app/helper/constants.dart';
@@ -25,29 +27,33 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xFFFAFAFA),
-      backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            decoration: new BoxDecoration(
-                gradient: new LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 25, 178, 238),
-                Color.fromARGB(255, 21, 236, 229)
-              ],
-            )),
-            padding: EdgeInsets.only(top: 5.h, bottom: 6.h),
+            // decoration: new BoxDecoration(
+            //     gradient: new LinearGradient(
+            //   begin: Alignment.topCenter,
+            //   end: Alignment.bottomCenter,
+            //   colors: [
+            //     Color.fromARGB(255, 25, 178, 238),
+            //     Color.fromARGB(255, 21, 236, 229)
+            //   ],
+            // )),
+            padding: EdgeInsets.only(top: 1.h, bottom: 6.h),
             width: double.infinity,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.asset(
                           'assets/Logo.png',
@@ -55,30 +61,6 @@ class Register extends StatelessWidget {
                           height: displayHeight(context) * 0.15,
                           fit: BoxFit.contain,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Sign up",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 30,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Create an Account,Its free",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        )
                       ],
                     ),
                     Padding(
@@ -89,6 +71,20 @@ class Register extends StatelessWidget {
                               // mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Register",
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 25,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
                                 Inputbox(
                                   controller: _registerController.fullName,
                                   label: "Full Name",
@@ -108,61 +104,55 @@ class Register extends StatelessWidget {
                                   focusNode: _registerController.focusUsername,
                                   errorText: "Required",
                                 ),
-                                Text(
-                                  "User type",
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      height: 2),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Wrap(
-                                  children: <Widget>[
-                                    for (var item
-                                        in _registerController.userList)
-                                      Obx(
-                                        () => Container(
-                                          // color: Colors.red,
-                                          margin: EdgeInsets.only(
-                                              left: 2, right: 3),
-                                          child: MaterialButton(
-                                              color: _registerController
-                                                      .userType
-                                                      .contains(item)
-                                                  ? kSecondaryColor
-                                                  : Colors.white,
-                                              splashColor: kPrimaryColor,
-                                              height: 32,
-                                              minWidth: Get.width / 4.5,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              child: Text(
-                                                item,
-                                                style: GoogleFonts.montserrat(
-                                                  fontSize: 13,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                _registerController
-                                                    .handleCategoryType(item);
-                                              }),
-                                        ),
-                                      )
-
-                                    //   Image.network(
-                                    //       'https://flutter-examples.com/wp-content/uploads/2019/09/blossom.jpg',
-                                    //       width: 300,
-                                    //       height: 200,
-                                    //       fit: BoxFit.contain),
-                                  ],
-                                ),
+                                // Text(
+                                //   "User type",
+                                //   style: GoogleFonts.montserrat(
+                                //       fontSize: 15,
+                                //       color: Colors.black,
+                                //       fontWeight: FontWeight.normal,
+                                //       height: 2),
+                                // ),
+                                // SizedBox(
+                                //   height: 5,
+                                // ),
+                                // Wrap(
+                                //   children: <Widget>[
+                                //     for (var item
+                                //         in _registerController.userList)
+                                //       Obx(
+                                //         () => Container(
+                                //           // color: Colors.red,
+                                //           margin: EdgeInsets.only(
+                                //               left: 2, right: 3),
+                                //           child: MaterialButton(
+                                //               color: _registerController
+                                //                       .userType
+                                //                       .contains(item)
+                                //                   ? kSecondaryColor
+                                //                   : Colors.white,
+                                //               splashColor: kPrimaryColor,
+                                //               height: 32,
+                                //               minWidth: Get.width / 4.5,
+                                //               shape: RoundedRectangleBorder(
+                                //                 borderRadius:
+                                //                     BorderRadius.circular(15),
+                                //               ),
+                                //               child: Text(
+                                //                 item,
+                                //                 style: GoogleFonts.montserrat(
+                                //                   fontSize: 13,
+                                //                   color: Colors.black,
+                                //                   fontWeight: FontWeight.w400,
+                                //                 ),
+                                //               ),
+                                //               onPressed: () {
+                                //                 _registerController
+                                //                     .handleCategoryType(item);
+                                //               }),
+                                //         ),
+                                //       )
+                                //   ],
+                                // ),
                                 // DropdownButton<String>(
                                 //   value: _registerController.userType.value,
                                 //   // hint: Text('Choose'),
@@ -224,70 +214,71 @@ class Register extends StatelessWidget {
                                   focusNode: _registerController.focusCPassword,
                                   errorText: "Required",
                                 ),
-                                // makeInput(label: "Full Name"),
-                                // makeInput(label: "User name"),
-                                // makeInput(label: "Email"),
-                                // makeInput(label: "Company Name"),
-                                // makeInput(label: "Password", obsureText: true),
-                                // makeInput(label: "Confirm Pasword", obsureText: true),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                          focusColor: Colors.lightBlue,
+                                          activeColor: kTextColor2,
+                                          value: _registerController
+                                              .isChecked.value,
+                                          onChanged: (newValue) {
+                                            _registerController
+                                                .toggleCheckBox();
+                                            // setState(() => rememberMe = newValue);
+                                          }),
+                                      RichText(
+                                        text: TextSpan(
+                                          text: "I agree to the ",
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: kSecondaryTextColor),
+                                          // style: DefaultTextStyle.of(context).style,
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: 'terms and conditions',
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Get.toNamed("/register");
+                                                },
+                                              style: GoogleFonts.roboto(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w800,
+                                                  color: kTextColor2),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ]),
+                                SizedBox(height: 4.h),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Button(
+                                        name: "Submit",
+                                        callback: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            _registerController
+                                                .postData('register');
+                                          }
+                                        }),
+                                  ],
+                                ),
                               ],
                             ),
                           )),
                     ),
-                    Center(
-                      child: MaterialButton(
-                          color: Colors.grey[300],
-                          splashColor: Colors.white,
-                          height: Get.height / 20,
-                          minWidth: Get.width / 2.5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            'SIGN UP',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          onPressed: () {
-                            // if (_formKey.currentState!.validate()) {
-                            _registerController.postData('register');
-                            // }
-                            // _registerController.bottomSheet();
-                            // Get.toNamed("otp");
-                          }),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Already have an account? ',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed("login");
-                          },
-                          child: Text(
-                            'Log in',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ],

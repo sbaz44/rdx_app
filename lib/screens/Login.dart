@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:rdx_app/components/Button.dart';
 import 'package:rdx_app/controller/LoginController.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:rdx_app/helper/size_helper.dart';
@@ -18,26 +20,27 @@ class Login extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(
-              top: 50,
+              top: 30,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Center(
                   child: Image.asset(
                     'assets/Logo.png',
-                    width: 400,
+                    width: 200,
                     height: displayHeight(context) * 0.15,
                     fit: BoxFit.contain,
                   ),
                 ),
                 SizedBox(
-                  height: displayHeight(context) * 0.08,
+                  height: displayHeight(context) * 0.06,
                 ),
+
                 // _buildChild(getToken.token),
-                SizedBox(
-                  height: displayHeight(context) * 0.08,
-                ),
+                // SizedBox(
+                //   height: displayHeight(context) * 0.08,
+                // ),
                 Container(
                   padding: EdgeInsets.fromLTRB(38, 0, 38, 0),
                   child: Form(
@@ -45,34 +48,62 @@ class Login extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        Text(
+                          "Login",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 25,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(
+                          height: displayHeight(context) * 0.02,
+                        ),
+                        Text(
+                          "Please sign in to continue.",
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: kSecondaryTextColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(
+                          height: displayHeight(context) * 0.07,
+                        ),
                         TextFormField(
                           controller: _loginController.username,
                           keyboardType: TextInputType.name,
                           decoration: InputDecoration(
-                            // fillColor: Colors.grey[200],
-                            filled: false,
-                            hintText: 'Username',
-                            hintStyle: GoogleFonts.montserrat(
-                              fontSize: 16,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            border: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              borderSide: BorderSide(
-                                color: new Color(0xFF2029A0),
-                                width: 6,
+                              // fillColor: Colors.grey[200],
+                              filled: false,
+                              hintText: 'Username',
+                              hintStyle: GoogleFonts.roboto(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.normal,
                               ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              borderSide: BorderSide(
-                                color: kPrimaryColor,
-                                width: 2,
+                              border: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                                borderSide: BorderSide(
+                                  color: new Color(0xFF2029A0),
+                                  width: 6,
+                                ),
                               ),
-                            ),
-                          ),
-                          style: GoogleFonts.exo2(
+                              enabledBorder: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                                borderSide: BorderSide(
+                                  color: kPrimaryColor,
+                                  width: 2,
+                                ),
+                              ),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 0, right: 10),
+                                child: IconTheme(
+                                  data: IconThemeData(color: Colors.grey),
+                                  child: Icon(Icons.person),
+                                ),
+                              )),
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
                             color: kTextColor,
                             fontWeight: FontWeight.normal,
@@ -82,41 +113,67 @@ class Login extends StatelessWidget {
                               : null,
                         ),
                         SizedBox(height: 50),
-                        TextFormField(
-                          // controller: _loginController.passwordTextController,
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey[200],
-                            filled: false,
-                            hintText: 'Password',
-                            hintStyle: GoogleFonts.montserrat(
+                        Obx(
+                          () => TextFormField(
+                            // controller: _loginController.passwordTextController,
+                            keyboardType: TextInputType.text,
+                            obscureText: _loginController.isHide.value,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey[200],
+                              filled: false,
+                              hintText: 'Password',
+                              hintStyle: GoogleFonts.roboto(
+                                fontSize: 16,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              border: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                                borderSide: BorderSide(
+                                  color: new Color(0xFF2029A0),
+                                  width: 6,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(0),
+                                borderSide: BorderSide(
+                                  color: kPrimaryColor,
+                                  width: 2,
+                                ),
+                              ),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.only(left: 0, right: 10),
+                                child: IconTheme(
+                                  data: IconThemeData(color: Colors.grey),
+                                  child: Icon(Icons.lock),
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  // Based on passwordVisible state choose the icon
+                                  //  _passwordVisible
+                                  _loginController.isHide.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  _loginController.togglePassword();
+                                  // Update the state i.e. toogle the state of passwordVisible variable
+                                  //  setState(() {
+                                  //      _passwordVisible = !_passwordVisible;
+                                  //  });
+                                },
+                              ),
+                            ),
+                            validator: (value) => value!.trim().isEmpty
+                                ? 'Password required'
+                                : null,
+                            style: GoogleFonts.roboto(
                               fontSize: 16,
-                              color: Colors.grey,
+                              color: kTextColor,
                               fontWeight: FontWeight.normal,
                             ),
-                            border: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              borderSide: BorderSide(
-                                color: new Color(0xFF2029A0),
-                                width: 6,
-                              ),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(0),
-                              borderSide: BorderSide(
-                                color: kPrimaryColor,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          validator: (value) => value!.trim().isEmpty
-                              ? 'Password required'
-                              : null,
-                          style: GoogleFonts.exo2(
-                            fontSize: 16,
-                            color: kTextColor,
-                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         SizedBox(
@@ -127,56 +184,75 @@ class Login extends StatelessWidget {
                         //       _buildInvalidandForget(_loginController.isError),
                         // ),
 
-                        SizedBox(height: 5.h),
-                        Center(
-                          child: MaterialButton(
-                              color: kButtonColor,
-                              splashColor: Colors.white,
-                              height: 32,
-                              minWidth: Get.width / 2.5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(2),
-                              ),
+                        SizedBox(height: 1.h),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () {},
                               child: Text(
-                                'LOG IN',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                "Forgot Password?",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: kSecondaryTextColor,
+                                  fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _loginController.postLogin('login');
-                                }
-                              }),
-                        ),
-                        SizedBox(height: 3.h),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed("/register");
-                          },
-                          child: Center(
-                            child: Text(
-                              'Sign Up',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 6.w,
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.w400,
-                              ),
                             ),
-                          ),
-                        )
+                          ],
+                        ),
+                        SizedBox(height: 4.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Button(
+                                name: "Submit",
+                                callback: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _loginController.postLogin('login');
+                                  }
+                                }),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ),
+
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 120),
-                    child: Text('Terms & Condition / Privacy Policy'),
+                    padding: EdgeInsets.only(top: 100),
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Don't have an account? ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: kSecondaryTextColor),
+                        // style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Sign up',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.toNamed("/register");
+                              },
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                                color: kTextColor2),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 )
               ],

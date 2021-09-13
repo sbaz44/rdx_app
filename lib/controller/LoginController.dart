@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 
 class LoginController extends GetxController {
   var loginResponse = LoginResponseModel().obs;
+  var isHide = false.obs;
 
   TextEditingController? username;
   TextEditingController? password;
@@ -37,8 +38,11 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
+  togglePassword() {
+    isHide.value = !isHide.value;
+  }
+
   validateInput(String name) {
-    print("object.......................");
     if (name == "Username") {
       if (username!.text.isEmpty)
         isUserNameEmpty.value = true;
