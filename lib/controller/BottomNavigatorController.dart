@@ -10,21 +10,14 @@ class BottomNavigatorController extends GetxController {
       case 0:
         Get.offAllNamed('/store');
         indexx(index);
-        print(index);
         break;
       case 1:
-        print("DEVICE index");
-        print(index);
-        Get.offAllNamed('/device');
+        Get.offAllNamed('/dashboard');
         indexx(index);
-
         break;
       case 2:
         Get.offAllNamed('/setting');
         indexx(index);
-        print("indexx");
-        print(indexx);
-
         break;
       // case 3:
       //   Get.offAllNamed('/setting');

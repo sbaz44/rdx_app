@@ -23,7 +23,7 @@ class Routerr {
       page: () => OTP(),
     ),
     GetPage(
-      name: '/device',
+      name: '/dashboard',
       page: () => Dashboard(),
     ),
     GetPage(
