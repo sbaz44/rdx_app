@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rdx_app/components/CategoryCard.dart';
+import 'package:rdx_app/components/UsecaseCard.dart';
 import 'package:rdx_app/controller/BottomNavigatorController.dart';
 import 'package:rdx_app/controller/StoreController.dart';
 import 'package:rdx_app/helper/Search.dart';
@@ -14,191 +16,242 @@ class Store extends StatelessWidget {
       Get.put(BottomNavigatorController());
 
   final StoreController _storeController = Get.put(StoreController());
+
+  Color _colorFromHex(String hexColor) {
+    final hexCode = hexColor.replaceAll('#', '');
+    return Color(int.parse('FF$hexCode', radix: 16));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: new Color(0xFFF7F7F7),
-      // appBar: AppBar(
-      //   backgroundColor: kPrimaryColor,
-      //   centerTitle: true,
-      //   title: Text('Store',
-      //       // style: TextStyle(fontFamily: 'RobotoMono'),
-      //       style: GoogleFonts.montserrat(
-      //         fontSize: 5.w,
-      //         fontWeight: FontWeight.w500,
-      //       )),
-      // ),
-      body: SafeArea(
-        child: Container(
-          child: new Column(
-            children: <Widget>[
-              // Container(
-              //   color: kBackgroundColor,
-              //   alignment: Alignment.center,
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(20.0),
-              //     child: Text(
-              //       'Store',
-              //       style: GoogleFonts.montserrat(
-              //         fontSize: 22,
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w600,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              GestureDetector(
-                onTap: () {
-                  showSearch(context: context, delegate: Search(list));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.0),
-                      color: Colors.grey[600],
-                      // boxShadow: [
-                      //   BoxShadow(color: Colors.green, spreadRadius: 3),
-                      // ],
-                    ),
-                    // color: Colors.red,
-                    child: Row(children: <Widget>[
-                      Icon(
-                        Icons.search,
-                        color: Colors.white60,
+        backgroundColor: new Color(0xFFFFFFFF),
+        // appBar: AppBar(
+        //   backgroundColor: kPrimaryColor,
+        //   centerTitle: true,
+        //   title: Text('Store',
+        //       // style: TextStyle(fontFamily: 'RobotoMono'),
+        //       style: GoogleFonts.montserrat(
+        //         fontSize: 5.w,
+        //         fontWeight: FontWeight.w500,
+        //       )),
+        // ),
+        body: SafeArea(
+          child: Container(
+            child: new Column(
+              children: <Widget>[
+                // Container(
+                //   color: kBackgroundColor,
+                //   alignment: Alignment.center,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(20.0),
+                //     child: Text(
+                //       'Store',
+                //       style: GoogleFonts.montserrat(
+                //         fontSize: 22,
+                //         color: Colors.black,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                GestureDetector(
+                  onTap: () {
+                    showSearch(context: context, delegate: Search(list));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: kTextColor2,
+                        // boxShadow: [
+                        //   BoxShadow(color: Colors.green, spreadRadius: 3),
+                        // ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 4.w),
-                        child: Text(
-                          "Search app",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            color: Colors.white60,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      )
-                    ]),
-                  ),
-                ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: TextField(
-              //     onChanged: (value) {},
-              //     onTap: () {
-              //       showSearch(context: context, delegate: Search(list));
-              //     },
-              //     // controller: editingController,
-              //     decoration: InputDecoration(
-              //         labelText: "Search",
-              //         hintText: "Search",
-              //         prefixIcon: Icon(Icons.search),
-              //         border: OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.all(Radius.circular(12.0)))),
-              //   ),
-              // ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Filter',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 15,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    for (var item in _storeController.catList)
-                      Obx(
-                        () => Container(
-                          margin: EdgeInsets.only(left: 10, right: 5),
-                          child: MaterialButton(
-                              // color: Colors.white,
-                              color: _storeController.category.contains(item)
-                                  ? kPrimaryColor
-                                  : Colors.white,
-                              splashColor: kPrimaryColor,
-                              height: 32,
-                              minWidth: Get.width / 4.5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
+                      // color: Colors.red,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(left: 4.w),
                               child: Text(
-                                item,
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 13,
-                                  color: Colors.black,
+                                "Search Use Cases",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: kTextColor,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              onPressed: () {
-                                _storeController.handleCategoryType(item);
-                                // print(catList);
-                                // if (_formKey.currentState.validate()) {
-                                //   _loginController.apiLogin('app/login', '');
-                                // }
-                              }),
-                        ),
-                      )
-
-                    //   Image.network(
-                    //       'https://flutter-examples.com/wp-content/uploads/2019/09/blossom.jpg',
-                    //       width: 300,
-                    //       height: 200,
-                    //       fit: BoxFit.contain),
-                  ],
+                            ),
+                            Icon(
+                              Icons.search,
+                              color: Colors.black,
+                            ),
+                          ]),
+                    ),
+                  ),
                 ),
-              ),
-              Expanded(child: __buildGrid(context)),
-              SizedBox(height: 20),
-              Expanded(child: __buildGrid(context))
-            ],
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: TextField(
+                //     onChanged: (value) {},
+                //     onTap: () {
+                //       showSearch(context: context, delegate: Search(list));
+                //     },
+                //     // controller: editingController,
+                //     decoration: InputDecoration(
+                //         labelText: "Search",
+                //         hintText: "Search",
+                //         prefixIcon: Icon(Icons.search),
+                //         border: OutlineInputBorder(
+                //             borderRadius:
+                //                 BorderRadius.all(Radius.circular(12.0)))),
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Filter',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: <Widget>[
+                //       for (var item in _storeController.categoryList)
+                //         Obx(
+                //           () => Container(
+                //             color: _colorFromHex(item['color']),
+                //             margin: EdgeInsets.only(left: 10, right: 5),
+                //             child: MaterialButton(
+                //                 // color: _colorFromHex(item['color']),
+                //                 // color: Color(int.parse(
+                //                 //     "0xff${item['color'].replaceAll("#", "")}")),
+                //                 // color: Colors.white,
+                //                 color: _storeController.category.contains(item)
+                //                     ? kPrimaryColor
+                //                     : kPrimaryColor,
+                //                 splashColor: kPrimaryColor,
+                //                 height: 32,
+                //                 minWidth: Get.width / 4.5,
+                //                 shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(15),
+                //                 ),
+                //                 child: Text(
+                //                   item['name'],
+                //                   style: GoogleFonts.montserrat(
+                //                     fontSize: 13,
+                //                     color: Colors.black,
+                //                     fontWeight: FontWeight.w400,
+                //                   ),
+                //                 ),
+                //                 onPressed: () {
+                //                   _storeController
+                //                       .handleCategoryType(item['name']);
+                //                   // print(catList);
+                //                   // if (_formKey.currentState.validate()) {
+                //                   //   _loginController.apiLogin('app/login', '');
+                //                   // }
+                //                 }),
+                //           ),
+                //         )
+
+                //       //   Image.network(
+                //       //       'https://flutter-examples.com/wp-content/uploads/2019/09/blossom.jpg',
+                //       //       width: 300,
+                //       //       height: 200,
+                //       //       fit: BoxFit.contain),
+                //     ],
+                //   ),
+                // ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: <Widget>[
+                        for (var item in _storeController.categoryList)
+                          Obx(() => CategoryCard(
+                                name: item['name'],
+                                color: _colorFromHex(item['color']),
+                                icon: item['icon'],
+                                isPresent: _storeController.category
+                                    .contains(item['name']),
+                                callback: () {
+                                  _storeController
+                                      .handleCategoryType(item['name']);
+                                },
+                              )),
+                      ],
+                    ),
+                  ),
+                ),
+                UsecaseCard(),
+                Expanded(child: __buildGrid(context)),
+                SizedBox(height: 20),
+                Expanded(child: __buildGrid(context))
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: kPrimaryColor,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black,
-        selectedLabelStyle: TextStyle(fontSize: 0),
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.stars_rounded,
+        bottomNavigationBar: SizedBox(
+          height: 9.h,
+          child: BottomNavigationBar(
+            backgroundColor: Color(0xFFF3F3F3),
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: kTextColor2,
+            unselectedItemColor: Colors.black,
+            selectedLabelStyle: GoogleFonts.roboto(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
             ),
-            label: '',
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/dash_inactive.png'),
+                activeIcon: new Image.asset('assets/dash_active.png'),
+                label: 'Dashboard',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/device_inactive.png'),
+                activeIcon: new Image.asset('assets/device_active.png'),
+                label: 'Manage device',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/store_inactive.png'),
+                activeIcon: new Image.asset('assets/store_active.png'),
+                label: 'Store',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/noti_inactive.png'),
+                activeIcon: new Image.asset('assets/noti_active.png'),
+                label: 'Notification',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/setting_inactive.png'),
+                activeIcon: new Image.asset('assets/setting_active.png'),
+                label: 'Setting',
+              ),
+            ],
+            currentIndex: _bottomNav.storeIndexx.value,
+            onTap: (index) {
+              // print(index);
+              _bottomNav.prescriptionNavigation(index);
+            },
+            selectedFontSize: 13.0,
+            unselectedFontSize: 13.0,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.assignment,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: '',
-          ),
-        ],
-        currentIndex: _bottomNav.indexx.value,
-        onTap: (index) {
-          // print(index);
-          _bottomNav.prescriptionNavigation(index);
-        },
-        selectedFontSize: 13.0,
-        unselectedFontSize: 13.0,
-      ),
-    );
+        ));
   }
 
   // Widget _buildList() {

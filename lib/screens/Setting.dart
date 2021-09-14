@@ -14,70 +14,84 @@ class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: new Color(0xFFF7F7F7),
-      // appBar: AppBar(
-      //   backgroundColor: kPrimaryColor,
-      //   centerTitle: true,
-      //   title: Text('Store',
-      //       // style: TextStyle(fontFamily: 'RobotoMono'),
-      //       style: GoogleFonts.montserrat(
-      //         fontSize: 5.w,
-      //         fontWeight: FontWeight.w500,
-      //       )),
-      // ),
-      body: SafeArea(
-        child: Container(
-          child: new Column(
-            children: <Widget>[
-              Container(
-                color: kBackgroundColor,
-                alignment: Alignment.center,
-                child: Text(
-                  'SETTING',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
+        backgroundColor: new Color(0xFFF7F7F7),
+        // appBar: AppBar(
+        //   backgroundColor: kPrimaryColor,
+        //   centerTitle: true,
+        //   title: Text('Store',
+        //       // style: TextStyle(fontFamily: 'RobotoMono'),
+        //       style: GoogleFonts.montserrat(
+        //         fontSize: 5.w,
+        //         fontWeight: FontWeight.w500,
+        //       )),
+        // ),
+        body: SafeArea(
+          child: Container(
+            child: new Column(
+              children: <Widget>[
+                Container(
+                  color: kBackgroundColor,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'SETTING',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: kPrimaryColor,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black,
-        selectedLabelStyle: TextStyle(fontSize: 0),
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.stars_rounded,
+        bottomNavigationBar: SizedBox(
+          height: 9.h,
+          child: BottomNavigationBar(
+            backgroundColor: Color(0xFFF3F3F3),
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: kTextColor2,
+            unselectedItemColor: Colors.black,
+            selectedLabelStyle: GoogleFonts.roboto(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
             ),
-            label: '',
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/dash_inactive.png'),
+                activeIcon: new Image.asset('assets/dash_active.png'),
+                label: 'Dashboard',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/device_inactive.png'),
+                activeIcon: new Image.asset('assets/device_active.png'),
+                label: 'Manage device',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/store_inactive.png'),
+                activeIcon: new Image.asset('assets/store_active.png'),
+                label: 'Store',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/noti_inactive.png'),
+                activeIcon: new Image.asset('assets/noti_active.png'),
+                label: 'Notification',
+              ),
+              BottomNavigationBarItem(
+                icon: new Image.asset('assets/setting_inactive.png'),
+                activeIcon: new Image.asset('assets/setting_active.png'),
+                label: 'Setting',
+              ),
+            ],
+            currentIndex: _bottomNav.settingIndexx.value,
+            onTap: (index) {
+              // print(index);
+              _bottomNav.prescriptionNavigation(index);
+            },
+            selectedFontSize: 13.0,
+            unselectedFontSize: 13.0,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.assignment,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: '',
-          ),
-        ],
-        currentIndex: _bottomNav.settingIndexx.value,
-        onTap: (index) {
-          // print(index);
-          _bottomNav.prescriptionNavigation(index);
-        },
-        selectedFontSize: 13.0,
-        unselectedFontSize: 13.0,
-      ),
-    );
+        ));
   }
 
   // Widget _buildList() {

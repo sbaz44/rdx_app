@@ -1,7 +1,9 @@
+import 'package:rdx_app/screens/Devices.dart';
 import 'package:rdx_app/screens/HomePage.dart';
 import 'package:rdx_app/screens/Login.dart';
 import 'package:rdx_app/screens/Dashboard.dart';
 import 'package:get/get.dart';
+import 'package:rdx_app/screens/Notification.dart';
 import 'package:rdx_app/screens/OTP.dart';
 import 'package:rdx_app/screens/Register.dart';
 import 'package:rdx_app/screens/SearchResult.dart';
@@ -25,6 +27,14 @@ class Routerr {
     GetPage(
       name: '/dashboard',
       page: () => Dashboard(),
+    ),
+    GetPage(
+      name: '/devices',
+      page: () => Devices(),
+    ),
+    GetPage(
+      name: '/notification',
+      page: () => Notification(),
     ),
     GetPage(
       name: '/store',

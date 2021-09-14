@@ -74,7 +74,7 @@ class Login extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Image.asset(
-                      'assets/Logo.png',
+                      'assets/health.png',
                       width: 200,
                       height: displayHeight(context) * 0.15,
                       fit: BoxFit.contain,

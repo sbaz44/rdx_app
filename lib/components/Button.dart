@@ -34,9 +34,6 @@ class Button extends StatelessWidget {
         ),
         onPressed: () {
           callback();
-          // if (_formKey.currentState!.validate()) {
-          //   _loginController.postLogin('login');
-          // }
         });
   }
 }
