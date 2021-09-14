@@ -56,6 +56,7 @@ class CategoryCard extends StatelessWidget {
             ),
             Text(
               name,
+              textAlign: TextAlign.center,
               style: GoogleFonts.roboto(
                 fontSize: 12,
                 color: kSecondaryTextColor,

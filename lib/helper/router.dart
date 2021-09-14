@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:rdx_app/screens/Notification.dart';
 import 'package:rdx_app/screens/OTP.dart';
 import 'package:rdx_app/screens/Register.dart';
+import 'package:rdx_app/screens/RegisterSuccess.dart';
 import 'package:rdx_app/screens/SearchResult.dart';
 import 'package:rdx_app/screens/Setting.dart';
 import 'package:rdx_app/screens/Store.dart';
@@ -23,6 +24,10 @@ class Routerr {
     GetPage(
       name: '/otp',
       page: () => OTP(),
+    ),
+    GetPage(
+      name: '/success',
+      page: () => RegisterSuccess(),
     ),
     GetPage(
       name: '/dashboard',

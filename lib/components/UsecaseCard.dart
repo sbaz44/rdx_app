@@ -9,6 +9,7 @@ class UsecaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 5, bottom: 5),
       width: 95.w,
       height: 90,
       padding: EdgeInsets.only(left: 6, top: 6, bottom: 6, right: 16),
@@ -83,14 +84,23 @@ class UsecaseCard extends StatelessWidget {
             ],
           ),
           Container(
-            child: Text(
-              "name",
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+            child: MaterialButton(
+                color: kButtonColor,
+                splashColor: Colors.white,
+                height: 26,
+                minWidth: 70,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  "Get",
+                  style: GoogleFonts.roboto(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                onPressed: () {}),
           )
         ],
       ),
