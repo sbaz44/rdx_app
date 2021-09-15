@@ -1,61 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rdx_app/controller/OTPController.dart';
+import 'package:rdx_app/controller/RegisterController.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class OTP extends StatelessWidget {
+  final OTPController _OTPController = Get.put(OTPController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         // backgroundColor: kPrimaryColor,
         backgroundColor: Color(0xFFFAFAFA),
-        body: SafeArea(
-            child: Column(
-          children: [
-            Container(
-              height: 60.h,
-              child: Center(
-                child: Wrap(
-                  spacing: 10,
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    OTPDigitTextFieldBox(first: true, last: false),
-                    OTPDigitTextFieldBox(first: false, last: false),
-                    OTPDigitTextFieldBox(first: false, last: false),
-                    OTPDigitTextFieldBox(first: false, last: false),
-                    OTPDigitTextFieldBox(first: false, last: false),
-                    OTPDigitTextFieldBox(first: false, last: true),
-                  ],
+        body: SingleChildScrollView(
+          child: SafeArea(
+              child: Column(
+            children: [
+              Container(
+                height: 60.h,
+                child: Center(
+                  child: Wrap(
+                    spacing: 10,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OTPDigitTextFieldBox(first: true, last: false),
+                      OTPDigitTextFieldBox(first: false, last: false),
+                      OTPDigitTextFieldBox(first: false, last: false),
+                      OTPDigitTextFieldBox(first: false, last: false),
+                      OTPDigitTextFieldBox(first: false, last: false),
+                      OTPDigitTextFieldBox(first: false, last: true),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Center(
-              child: MaterialButton(
-                  color: kPrimaryColor,
-                  splashColor: Colors.white,
-                  height: Get.height / 20,
-                  minWidth: Get.width / 2.5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    'Validate',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
+              Center(
+                child: MaterialButton(
+                    color: kPrimaryColor,
+                    splashColor: Colors.white,
+                    height: Get.height / 20,
+                    minWidth: Get.width / 2.5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  ),
-                  onPressed: () {
-                    // Get.offAndToNamed('/store');
-                    // if (_formKey.currentState.validate()) {
-                    //   _loginController.apiLogin('app/login', '');
-                    // }
-                  }),
-            ),
-          ],
-        )));
+                    child: Text(
+                      'Validate',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    onPressed: () {
+                      // Get.offAndToNamed('/store');
+                      // if (_formKey.currentState.validate()) {
+                      //   _loginController.apiLogin('app/login', '');
+                      // }
+                    }),
+              ),
+            ],
+          )),
+        ));
   }
 }
 

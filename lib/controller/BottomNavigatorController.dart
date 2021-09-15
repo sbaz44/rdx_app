@@ -1,11 +1,17 @@
 import 'package:get/get.dart';
 
 class BottomNavigatorController extends GetxController {
+  var isAccess = true.obs;
   var indexx = 0.obs;
   var deviceIndexx = 1.obs;
   var storeIndexx = 2.obs;
   var notificationIndexx = 3.obs;
   var settingIndexx = 4.obs;
+
+  toggleAccess() {
+    print("object11");
+    isAccess.value = !isAccess.value;
+  }
 
   void prescriptionNavigation(dynamic index) {
     switch (index) {

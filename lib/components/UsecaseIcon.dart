@@ -40,10 +40,11 @@ class UsecaseIcon extends StatelessWidget {
                     ),
                     child: Text(
                       "1",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
+                      style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),

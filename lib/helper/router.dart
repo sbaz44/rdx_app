@@ -1,3 +1,4 @@
+import 'package:rdx_app/screens/ChangePassword.dart';
 import 'package:rdx_app/screens/Devices.dart';
 import 'package:rdx_app/screens/HomePage.dart';
 import 'package:rdx_app/screens/Login.dart';
@@ -20,6 +21,10 @@ class Routerr {
     GetPage(
       name: '/register',
       page: () => Register(),
+    ),
+    GetPage(
+      name: '/password',
+      page: () => ChangePassword(),
     ),
     GetPage(
       name: '/otp',

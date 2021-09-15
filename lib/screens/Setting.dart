@@ -15,33 +15,64 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: new Color(0xFFF7F7F7),
-        // appBar: AppBar(
-        //   backgroundColor: kPrimaryColor,
-        //   centerTitle: true,
-        //   title: Text('Store',
-        //       // style: TextStyle(fontFamily: 'RobotoMono'),
-        //       style: GoogleFonts.montserrat(
-        //         fontSize: 5.w,
-        //         fontWeight: FontWeight.w500,
-        //       )),
-        // ),
-        body: SafeArea(
-          child: Container(
-            child: new Column(
-              children: <Widget>[
-                Container(
-                  color: kBackgroundColor,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'SETTING',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ],
+        body: Scaffold(
+          body: SafeArea(
+            child: Container(
+              padding:
+                  EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 30),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SettingTile("Personal Information", () {
+                    print("object");
+                  }),
+                  Container(
+                      margin: EdgeInsets.only(top: 8, bottom: 8),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                                kBackgroundColor2, // This is what you need!
+                          ),
+                          onPressed: () {},
+                          child: Obx(() => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _bottomNav.isAccess.value
+                                        ? "Access Key"
+                                        : "7dab8b8af1c9e43086f55be1f491688fbabcb624",
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _bottomNav.toggleAccess();
+                                    },
+                                    child: Icon(
+                                      // Based on passwordVisible state choose the icon
+                                      //  _passwordVisible
+                                      _bottomNav.isAccess.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.black,
+                                      size: 25,
+                                    ),
+                                  )
+                                  // Icon(
+                                  //   Icons.copy,
+                                  //   color: Colors.black,
+                                  // )
+                                ],
+                              )))),
+                  SettingTile("Change Password", () {
+                    Get.toNamed("/password");
+                  }),
+                ],
+              ),
             ),
           ),
         ),
@@ -110,35 +141,35 @@ class Setting extends StatelessWidget {
   //       ));
   // }
 
-  Widget __buildGrid(context) {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
-    final double itemWidth = size.width / 0.8;
-    return LayoutBuilder(builder: (context, constraints) {
-      return GridView.builder(
-        itemCount: 100,
-        primary: false,
-        shrinkWrap: true,
-        itemBuilder: (context, index) => ItemTile(index),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
-          childAspectRatio: (itemWidth / itemHeight),
-        ),
-      );
-    });
-  }
+  // Widget __buildGrid(context) {
+  //   var size = MediaQuery.of(context).size;
+  //   final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+  //   final double itemWidth = size.width / 0.8;
+  //   return LayoutBuilder(builder: (context, constraints) {
+  //     return GridView.builder(
+  //       itemCount: 100,
+  //       primary: false,
+  //       shrinkWrap: true,
+  //       itemBuilder: (context, index) => ItemTile(index),
+  //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //         crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
+  //         childAspectRatio: (itemWidth / itemHeight),
+  //       ),
+  //     );
+  //   });
+  // }
 
-  Widget _buildProgressIndicator() {
-    return new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new Center(
-        child: Opacity(
-          opacity: 1.0,
-          child: new CircularProgressIndicator(),
-        ),
-      ),
-    );
-  }
+  // Widget _buildProgressIndicator() {
+  //   return new Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: new Center(
+  //       child: Opacity(
+  //         opacity: 1.0,
+  //         child: new CircularProgressIndicator(),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // Widget _buildSearchBox() {
   //   return new Padding(
@@ -170,50 +201,39 @@ class Setting extends StatelessWidget {
   // }
 }
 
-class ItemTile extends StatelessWidget {
-  final int itemNo;
-
-  const ItemTile(
-    this.itemNo,
-  );
+class SettingTile extends StatelessWidget {
+  final String name;
+  final Function callback;
+  const SettingTile(this.name, this.callback);
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Colors.primaries[itemNo % Colors.primaries.length];
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          color: color,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'DEVICE ' + itemNo.toString(),
-                style: GoogleFonts.montserrat(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+    return Container(
+        margin: EdgeInsets.only(top: 8, bottom: 8),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: kBackgroundColor2, // This is what you need!
+            ),
+            onPressed: () {
+              callback();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  name,
+                  style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        )
-        // ListTile(
-        //   tileColor: color.withOpacity(0.3),
-        //   onTap: () {},
-        //   leading: Container(
-        //     width: 50,
-        //     height: 30,
-        //     color: color.withOpacity(0.5),
-        //     child: Placeholder(
-        //       color: color,
-        //     ),
-        //   ),
-        //   title: Text(
-        //     'Product $itemNo',
-        //     key: Key('text_$itemNo'),
-        //   ),
-        // ),
-        );
+                Image.asset(
+                  'assets/arrow.png',
+                  width: 15,
+                  fit: BoxFit.contain,
+                )
+              ],
+            )));
   }
 }

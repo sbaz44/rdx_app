@@ -267,11 +267,20 @@ class Register extends StatelessWidget {
                                     Button(
                                         name: "Submit",
                                         callback: () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            _registerController
-                                                .postData('register');
-                                          }
+                                          Get.toNamed("/otp", arguments: {
+                                            "fullName": "ASVSDE",
+                                            "phone": "7826665457",
+                                            "email": "jilmehekko@biyac.com",
+                                            "companyName": "companyName?.text1",
+                                            "userType": ['user'],
+                                            "username": "username5",
+                                            "password": "password123",
+                                          });
+                                          // if (_formKey.currentState!
+                                          //     .validate()) {
+                                          //   _registerController
+                                          //       .postData('register');
+                                          // }
                                         }),
                                   ],
                                 ),
