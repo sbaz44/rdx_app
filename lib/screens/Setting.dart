@@ -18,6 +18,7 @@ class Setting extends StatelessWidget {
         body: Scaffold(
           body: SafeArea(
             child: Container(
+              height: MediaQuery.of(context).size.height - 100,
               padding:
                   EdgeInsets.only(top: 30, left: 15, right: 15, bottom: 30),
               child: new Column(
@@ -62,15 +63,33 @@ class Setting extends StatelessWidget {
                                       size: 25,
                                     ),
                                   )
-                                  // Icon(
-                                  //   Icons.copy,
-                                  //   color: Colors.black,
-                                  // )
                                 ],
                               )))),
                   SettingTile("Change Password", () {
                     Get.toNamed("/password");
                   }),
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.bottomCenter,
+                      child: MaterialButton(
+                          color: Color(0xFFF13B2E),
+                          splashColor: Colors.white,
+                          height: 50,
+                          minWidth: Get.width,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            "Sign Out",
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          onPressed: () {}),
+                    ),
+                  ),
                 ],
               ),
             ),

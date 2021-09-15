@@ -54,7 +54,7 @@ class PurchasedUCCard extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 6, bottom: 6),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: 35.w,
+                              maxWidth: 50.w,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

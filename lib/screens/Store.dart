@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/components/ActiveUsecaseCard.dart';
 import 'package:rdx_app/components/CategoryCard.dart';
+import 'package:rdx_app/components/NotificationCard.dart';
 import 'package:rdx_app/components/PurchasedUCCard.dart';
 import 'package:rdx_app/components/UsecaseCard.dart';
 import 'package:rdx_app/components/UsecaseIcon.dart';
@@ -206,7 +207,8 @@ class Store extends StatelessWidget {
                   UsecaseCard(),
                   UsecaseIcon(),
                   ActiveUsecaseCard(),
-                  PurchasedUCCard()
+                  PurchasedUCCard(),
+                  NotificationCard()
                   // Expanded(child: __buildGrid(context)),
                   // SizedBox(height: 20),
                   // Expanded(child: __buildGrid(context))

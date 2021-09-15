@@ -21,7 +21,8 @@ class ChangePassword extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 10, left: 30, right: 30),
+          height: MediaQuery.of(context).size.height - 100,
+          padding: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -202,7 +203,35 @@ class ChangePassword extends StatelessWidget {
                         ],
                       )),
                 ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: MaterialButton(
+                      color: Color(0xFF242414),
+                      splashColor: Colors.white,
+                      height: 50,
+                      minWidth: Get.width,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        "Save",
+                        style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      onPressed: () {}),
+                ),
               )
+              // Expanded(
+              //   child: ElevatedButton(
+              //     onPressed: () {},
+              //     child: Text('Click'),
+              //   ),
+              // )
             ],
           ),
         ),
