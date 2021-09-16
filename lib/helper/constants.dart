@@ -8,4 +8,5 @@ const kButtonColor = Color(0xFF3A3A3A);
 const kSecondaryColor = Color(0xFFACA6D4);
 const kBackgroundColor = Color(0xFFFAFAFA);
 const kBackgroundColor2 = Color(0xFFF8F8F8);
+const kBackgroundColor3 = Color(0xFF26AAA6);
 const kTextColor2 = Color(0xFFFCB901);
