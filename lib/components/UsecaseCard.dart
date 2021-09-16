@@ -4,7 +4,9 @@ import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class UsecaseCard extends StatelessWidget {
-  const UsecaseCard({Key? key}) : super(key: key);
+  final Function callback;
+
+  const UsecaseCard({Key? key, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +102,9 @@ class UsecaseCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  callback();
+                }),
           )
         ],
       ),

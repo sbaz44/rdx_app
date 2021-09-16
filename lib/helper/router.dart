@@ -11,6 +11,7 @@ import 'package:rdx_app/screens/RegisterSuccess.dart';
 import 'package:rdx_app/screens/SearchResult.dart';
 import 'package:rdx_app/screens/Setting.dart';
 import 'package:rdx_app/screens/Store.dart';
+import 'package:rdx_app/screens/Usecase.dart';
 
 class Routerr {
   static final route = [
@@ -25,6 +26,10 @@ class Routerr {
     GetPage(
       name: '/password',
       page: () => ChangePassword(),
+    ),
+    GetPage(
+      name: '/usecase',
+      page: () => Usecase(),
     ),
     GetPage(
       name: '/otp',

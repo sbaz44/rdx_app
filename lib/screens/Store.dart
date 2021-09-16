@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/components/ActiveUsecaseCard.dart';
 import 'package:rdx_app/components/CategoryCard.dart';
+import 'package:rdx_app/components/LicenseOptionSheet.dart';
 import 'package:rdx_app/components/NotificationCard.dart';
 import 'package:rdx_app/components/PurchasedUCCard.dart';
 import 'package:rdx_app/components/UsecaseCard.dart';
@@ -45,21 +46,6 @@ class Store extends StatelessWidget {
             child: Container(
               child: new Column(
                 children: <Widget>[
-                  // Container(
-                  //   color: kBackgroundColor,
-                  //   alignment: Alignment.center,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(20.0),
-                  //     child: Text(
-                  //       'Store',
-                  //       style: GoogleFonts.montserrat(
-                  //         fontSize: 22,
-                  //         color: Colors.black,
-                  //         fontWeight: FontWeight.w600,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   GestureDetector(
                     onTap: () {
                       showSearch(context: context, delegate: Search(list));
@@ -202,9 +188,11 @@ class Store extends StatelessWidget {
                       ),
                     ),
                   ),
-                  UsecaseCard(),
-                  UsecaseCard(),
-                  UsecaseCard(),
+                  UsecaseCard(
+                    callback: () {
+                      _showMyBottomSheet();
+                    },
+                  ),
                   UsecaseIcon(),
                   ActiveUsecaseCard(),
                   PurchasedUCCard(),
@@ -264,6 +252,10 @@ class Store extends StatelessWidget {
             unselectedFontSize: 13.0,
           ),
         ));
+  }
+
+  void _showMyBottomSheet() {
+    Get.bottomSheet(LicenseOptionSheet());
   }
 
   // Widget _buildList() {
