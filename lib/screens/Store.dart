@@ -536,12 +536,12 @@ class Store extends StatelessWidget {
                               callback: () {
                                 Navigator.pop(context, false);
                               },
-                              widthh: 130,
+                              widthh: Get.width / 3.8,
                             ),
                             Button(
                               name: "Yes",
                               callback: () {},
-                              widthh: 130,
+                              widthh: Get.width / 3.8,
                             )
                           ],
                         ),

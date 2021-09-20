@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rdx_app/components/Button.dart';
 import 'package:rdx_app/controller/BottomNavigatorController.dart';
+import 'package:rdx_app/helper/animated_dialog.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
@@ -87,7 +89,9 @@ class Setting extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            openConfirmationBox(context);
+                          }),
                     ),
                   ),
                 ],
@@ -144,80 +148,80 @@ class Setting extends StatelessWidget {
         ));
   }
 
-  // Widget _buildList() {
-  //   return Obx(() => ListView.builder(
-  //         scrollDirection: Axis.vertical,
-  //         shrinkWrap: true,
-  //         // itemCount: names.length + 1,
-  //         itemCount: _alertController.data.length,
-  //         itemBuilder: (BuildContext context, int index) {
-  //           // if (index == _alertController.data.length) {
-  //           //   return _buildProgressIndicator();
-  //           // } else {
-  //           return AlertCard(_alertController.data[index], index);
-  //           // }
-  //         },
-  //       ));
-  // }
+  openConfirmationBox(context) {
+    return showNewDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.zero,
+            // title: Text("Bounce In"),
+            content: Container(
+              height: 130,
+              width: 350,
+              padding: EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Icon(Icons.close)),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Center(
+                        child: Text(
+                          "Are you sure?",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.roboto(
+                            fontSize: 14,
+                            color: kButtonColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
 
-  // Widget __buildGrid(context) {
-  //   var size = MediaQuery.of(context).size;
-  //   final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
-  //   final double itemWidth = size.width / 0.8;
-  //   return LayoutBuilder(builder: (context, constraints) {
-  //     return GridView.builder(
-  //       itemCount: 100,
-  //       primary: false,
-  //       shrinkWrap: true,
-  //       itemBuilder: (context, index) => ItemTile(index),
-  //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //         crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
-  //         childAspectRatio: (itemWidth / itemHeight),
-  //       ),
-  //     );
-  //   });
-  // }
-
-  // Widget _buildProgressIndicator() {
-  //   return new Padding(
-  //     padding: const EdgeInsets.all(8.0),
-  //     child: new Center(
-  //       child: Opacity(
-  //         opacity: 1.0,
-  //         child: new CircularProgressIndicator(),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildSearchBox() {
-  //   return new Padding(
-  //     padding: const EdgeInsets.all(8.0),
-  //     child: new Card(
-  //       child: new ListTile(
-  //         leading: new Icon(Icons.search),
-  //         title: new TextField(
-  //           controller: _alertController.searchTextController,
-  //           keyboardType: TextInputType.text,
-  //           decoration: new InputDecoration(
-  //               hintText: 'Search', border: InputBorder.none),
-  //           // onChanged: onSearchTextChanged,
-  //           onSubmitted: (text) {
-  //             print("texttttttttttt");
-  //             print(text);
-  //           },
-  //         ),
-  //         trailing: new IconButton(
-  //           icon: new Icon(Icons.cancel),
-  //           onPressed: () {
-  //             _alertController.searchTextController.clear();
-  //             // onSearchTextChanged('');
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Button(
+                              name: "No",
+                              callback: () {
+                                Navigator.pop(context, false);
+                              },
+                              widthh: Get.width / 3.8,
+                            ),
+                            Button(
+                              name: "Yes",
+                              callback: () {
+                                Get.offAndToNamed('/login');
+                              },
+                              widthh: Get.width / 3.8,
+                            )
+                          ],
+                        ),
+                      )
+                      // Center(child: Button(name: "Submit", callback: () {}))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
 }
 
 class SettingTile extends StatelessWidget {
