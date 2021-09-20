@@ -7,10 +7,12 @@ class Button extends StatelessWidget {
   final String name;
   final Color? color;
   final Function callback;
+  final double? widthh;
   const Button(
       {Key? key,
       required this.name,
       this.color = kButtonColor,
+      this.widthh = 170,
       required this.callback})
       : super(key: key);
 
@@ -20,7 +22,7 @@ class Button extends StatelessWidget {
         color: color,
         splashColor: Colors.white,
         height: 50,
-        minWidth: Get.width / 2.5,
+        minWidth: widthh,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
         ),

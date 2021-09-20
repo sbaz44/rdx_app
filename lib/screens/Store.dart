@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/components/ActiveUsecaseCard.dart';
+import 'package:rdx_app/components/Button.dart';
 import 'package:rdx_app/components/CategoryCard.dart';
 import 'package:rdx_app/components/LicenseOptionSheet.dart';
 import 'package:rdx_app/components/NotificationCard.dart';
@@ -10,12 +11,16 @@ import 'package:rdx_app/components/PurchasedUCCard.dart';
 import 'package:rdx_app/components/UsecaseCard.dart';
 import 'package:rdx_app/components/UsecaseIcon.dart';
 import 'package:rdx_app/controller/BottomNavigatorController.dart';
+import 'package:rdx_app/controller/PaymentController.dart';
 import 'package:rdx_app/controller/StoreController.dart';
 import 'package:rdx_app/helper/Search.dart';
+import 'package:rdx_app/helper/animated_dialog.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class Store extends StatelessWidget {
+  final PaymentController _paymentController = Get.put(PaymentController());
+
   final List<String> list = List.generate(10, (index) => "Text $index");
   final BottomNavigatorController _bottomNav =
       Get.put(BottomNavigatorController());
@@ -195,7 +200,11 @@ class Store extends StatelessWidget {
                   ),
                   UsecaseIcon(),
                   ActiveUsecaseCard(),
-                  PurchasedUCCard(),
+                  PurchasedUCCard(
+                    callback: () {
+                      openBox(context);
+                    },
+                  ),
                   NotificationCard()
                   // Expanded(child: __buildGrid(context)),
                   // SizedBox(height: 20),
@@ -332,6 +341,270 @@ class Store extends StatelessWidget {
   //     ),
   //   );
   // }
+
+  openBox(context) {
+    return showNewDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.zero,
+            // title: Text("Bounce In"),
+            content: Container(
+              height: 375,
+              width: 350,
+              padding: EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Icon(Icons.close)),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/uc1.png',
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            "Fire Detection",
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "License Duration",
+                        style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          color: kButtonColor,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Column(
+                        children: [
+                          for (var item in [
+                            "Monthly",
+                            "Quarterly",
+                            "Yearly",
+                            "Lifetime"
+                          ])
+                            _buildLicenseItem(item),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                          child: Button(
+                              name: "Submit",
+                              callback: () {
+                                Navigator.pop(context, false);
+                                openConfirmationBox(context);
+                              }))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  openConfirmationBox(context) {
+    return showNewDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.zero,
+            // title: Text("Bounce In"),
+            content: Container(
+              height: 375,
+              width: 350,
+              padding: EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: Icon(Icons.close)),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/uc1.png',
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            "Fire Detection",
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "License Duration",
+                        style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          color: kButtonColor,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      Column(
+                        children: [
+                          _buildLicenseItem(
+                              _paymentController.selectedPayment.value),
+                          SizedBox(
+                            height: 35,
+                          ),
+                          Text(
+                            "Once a use case is linked to the device the License can not be reversed",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: kSecondaryTextColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Are you sure?",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              color: kButtonColor,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Button(
+                              name: "No",
+                              callback: () {
+                                Navigator.pop(context, false);
+                              },
+                              widthh: 130,
+                            ),
+                            Button(
+                              name: "Yes",
+                              callback: () {},
+                              widthh: 130,
+                            )
+                          ],
+                        ),
+                      )
+                      // Center(child: Button(name: "Submit", callback: () {}))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Widget _buildLicenseItem(String text) {
+    return GestureDetector(
+      onTap: () {
+        _paymentController.setPayment(text);
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+            // color: kTextColor2,
+            border: Border(bottom: BorderSide(width: 1, color: Colors.grey))
+            // boxShadow: [
+            //   BoxShadow(color: Colors.green, spreadRadius: 3),
+            // ],
+            ),
+        padding: EdgeInsets.only(top: 5, bottom: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                color: kSecondaryTextColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Obx(() => Container(
+                  margin: EdgeInsets.only(right: 15),
+                  width: 15,
+                  height: 15,
+                  decoration: BoxDecoration(
+                      color: _paymentController.selectedPayment.value == text
+                          ? kTextColor2
+                          : Colors.transparent,
+                      border: Border.all(
+                          width:
+                              _paymentController.selectedPayment.value == text
+                                  ? 1
+                                  : 0,
+                          color:
+                              _paymentController.selectedPayment.value == text
+                                  ? Colors.transparent
+                                  : Color(0xFF26AAA6))),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class ItemTile extends StatelessWidget {

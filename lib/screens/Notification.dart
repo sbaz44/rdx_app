@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rdx_app/components/NotificationCard.dart';
 import 'package:rdx_app/controller/BottomNavigatorController.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
@@ -14,7 +15,7 @@ class Notification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: new Color(0xFFF7F7F7),
+        backgroundColor: new Color(0xFFFFFFFF),
         // appBar: AppBar(
         //   backgroundColor: kPrimaryColor,
         //   centerTitle: true,
@@ -27,20 +28,29 @@ class Notification extends StatelessWidget {
         // ),
         body: SafeArea(
           child: Container(
+            // padding: EdgeInsets.only(top: 20,left: 15,right: 15,bottom: 20),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  color: kBackgroundColor,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Notification',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
+                Text(
+                  'Notification',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
+                SizedBox(
+                  height: 25,
+                ),
+                NotificationCard(),
+                NotificationCard(),
+                NotificationCard(),
+                NotificationCard(),
+                NotificationCard(),
+
                 // Expanded(child: __buildGrid(context))
               ],
             ),

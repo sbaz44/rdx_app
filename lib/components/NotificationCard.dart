@@ -19,7 +19,7 @@ class NotificationCard extends StatelessWidget {
           child: Container(
             height: 60,
             margin: EdgeInsets.only(top: 5, bottom: 5),
-            padding: EdgeInsets.only(left: 6, top: 0, bottom: 0, right: 16),
+            padding: EdgeInsets.only(left: 0, top: 0, bottom: 0, right: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.0),
               color: Color(0xFFF8F8F8),
@@ -62,7 +62,7 @@ class NotificationCard extends StatelessWidget {
                               'Fire Detected',
                               style: GoogleFonts.montserrat(
                                 fontSize: 14,
-                                color: Colors.black,
+                                color: kButtonColor,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -70,7 +70,7 @@ class NotificationCard extends StatelessWidget {
                               'Alert Time: 14:22:40',
                               style: GoogleFonts.montserrat(
                                 fontSize: 12,
-                                color: Colors.black,
+                                color: kButtonColor,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -78,7 +78,7 @@ class NotificationCard extends StatelessWidget {
                               'Alert Date: 14-08-21',
                               style: GoogleFonts.montserrat(
                                 fontSize: 12,
-                                color: Colors.black,
+                                color: kButtonColor,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),

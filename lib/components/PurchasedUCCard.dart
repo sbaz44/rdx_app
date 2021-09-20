@@ -4,7 +4,9 @@ import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class PurchasedUCCard extends StatelessWidget {
-  const PurchasedUCCard({Key? key}) : super(key: key);
+  final Function callback;
+
+  const PurchasedUCCard({Key? key, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +145,9 @@ class PurchasedUCCard extends StatelessWidget {
                           size: 25,
                           color: kTextColor2,
                         ),
-                        onPressed: () {}),
+                        onPressed: () {
+                          callback();
+                        }),
                   ],
                 ),
               ),
