@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "757243847636",
+    "project_id": "flutter-rdx",
+    "storage_bucket": "flutter-rdx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757243847636:android:227096208114488af66c41",
+        "android_client_info": {
+          "package_name": "com.example.rdx_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757243847636-5dt5iuego8pe5hnnb74kheoc9t8r0ns0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rdx_app",
+            "certificate_hash": "be180388f2868ba19c3ad1b5fd5ff95533af1e9d"
+          }
+        },
+        {
+          "client_id": "757243847636-evv8acm1l7p1si3cfvs679m8u8f1t030.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1HC7KdwWarXp-fgLqdQ8UZWOa_pycfrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757243847636-evv8acm1l7p1si3cfvs679m8u8f1t030.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
