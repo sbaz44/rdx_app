@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rdx_app/controller/OTPController.dart';
-import 'package:rdx_app/controller/RegisterController.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 

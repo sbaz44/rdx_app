@@ -1,10 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'package:rdx_app/helper/request.dart';
 import 'package:rdx_app/models/SearchModel.dart';
-import 'package:rdx_app/models/SwapiModel.dart';
 
 class SearchController extends GetxController {
   var category = [].obs;

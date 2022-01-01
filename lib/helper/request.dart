@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 // import 'package:flutter_pill/helper/url.dart';
 
@@ -10,11 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:rdx_app/models/LoginModel.dart';
 import 'package:rdx_app/models/OTP.dart';
 import 'package:rdx_app/models/OTPGenratedResponse.dart';
-import 'package:rdx_app/models/RegisterModel.dart';
 import 'package:rdx_app/models/SearchModel.dart';
-import 'package:rdx_app/models/SwapiModel.dart';
 
-final _baseUrl = 'http://182.70.113.98:81/api/v1/users/';
+final _baseUrl = 'http://marketplace.diycam.com/api/v1/users/';
 final _swapibaseUrl = 'http://api.tvmaze.com/search/shows?q=golden%20girls';
 Dio dioo = Dio();
 //  dio instance to request token

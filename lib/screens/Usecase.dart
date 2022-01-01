@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:rdx_app/components/LicenseOptionSheet.dart';
 import 'package:rdx_app/controller/UsecaseController.dart';
 import 'package:rdx_app/helper/size_helper.dart';
-import 'package:sizer/sizer.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -323,9 +322,6 @@ class ExpandableTextState extends State<ExpandableText> {
 
   @override
   Widget build(BuildContext context) {
-    final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
-    final colorClickableText = Colors.blue;
-    final widgetColor = Colors.black;
     TextSpan link = TextSpan(
         text: _readMore ? "...more" : " less",
         style: GoogleFonts.roboto(

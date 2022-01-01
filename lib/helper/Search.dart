@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rdx_app/controller/SearchController.dart';
-import 'package:rdx_app/controller/StoreController.dart';
 
 class Search extends SearchDelegate {
   final SearchController _searchController = Get.put(SearchController());

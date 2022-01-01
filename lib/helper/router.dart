@@ -1,6 +1,7 @@
 import 'package:rdx_app/screens/ChangePassword.dart';
 import 'package:rdx_app/screens/Devices.dart';
 import 'package:rdx_app/screens/HomePage.dart';
+import 'package:rdx_app/screens/Loading.dart';
 import 'package:rdx_app/screens/Login.dart';
 import 'package:rdx_app/screens/Dashboard.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,10 @@ import 'package:rdx_app/screens/Usecase.dart';
 
 class Routerr {
   static final route = [
+    GetPage(
+      name: '/loading',
+      page: () => Loading(),
+    ),
     GetPage(
       name: '/login',
       page: () => Login(),

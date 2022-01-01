@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:rdx_app/helper/constants.dart';
 import 'package:rdx_app/helper/router.dart';
 import 'package:sizer/sizer.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 defaultTransition: Transition.rightToLeftWithFade,
                 getPages: Routerr.route,
-                initialRoute: '/store',
+                initialRoute: '/dashboard',
                 theme: ThemeData(
                   // primarySwatch: new Color(0xFF2029A0),
                   primaryColor: kPrimaryColor,
